@@ -1,27 +1,18 @@
 ---
-# try also 'default' to start simple
 theme: vuetiful
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
 background: https://source.unsplash.com/collection/94734566/1920x1080
-# apply any windi css classes to the current slide
-class: 'text-center'
-# https://sli.dev/custom/highlighters.html
+class: text-center
 highlighter: shiki
-# show line numbers in code blocks
 lineNumbers: false
-# some information about the slides, markdown enabled
 info: |
   ## Introducción a Vue.js 3
   Presentation slides for developers.
 
   Learn more at [Sli.dev](https://sli.dev)
+title: Introducción a Vue.js 3
 ---
 
 # Introducción a Vue.js 3
-
-
-Presentation slides for developers
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -33,40 +24,134 @@ Presentation slides for developers
   <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <carbon:edit />
   </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
+  <a href="https://github.com/FranzAnt/Vue-3-Intro-Slide" target="_blank" alt="GitHub"
     class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
 </div>
 
 
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
+---
+layout: section
+---
+
+# Conceptos
+
 
 ---
 
-# What is Slidev?
+# ¿Qué es ?
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+Dom significa Document Object Model, y es la interfaz de nuestro navegador (API) para cambiar lo que se muestra en el navegador.
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
+<div class="grid grid-cols-3 gap-10 pt-4 -mb-1">
 
+```html {all|1|1-6|9|all}
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <title>Título</title>
+  </head>
+  <body>
+    <h1>Es una cabecera</h1>
+  </body>
+</html>
+
+```
+
+
+```mermaid {  scale: 0.9}
+flowchart LR
+document(document..)
+html(html.)
+head(head..)
+body(body.)
+title(title..)
+h1(h1.)
+text(Es una cabecera....')
+text_title(Título..)
+  
+document --> html
+html --> head
+html --> body
+head --> title
+body --> h1
+h1 --> text
+title --> text_title
+```
+
+</div>
+
+
+<img height="50" border="rounded" src="/img/html.png">
+
+<arrow v-click="2" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
+
+<style>
+.footnotes-sep {
+  @apply mt-20 opacity-10;
+}
+.footnotes {
+  @apply text-sm opacity-75;
+}
+.footnote-backref {
+  display: none;
+}
+</style>
+
+
+---
+
+# ¿Cómo se manipula el DOM?
+
+Usamos JavaScript para manipular DOM, así: 
+
+
+```js
+let item = document.getElementsByTagName("h1")[0];
+item.textContent = "Nueva Cabecera";
+
+```
+
+
+
+---
+
+# Problema con el DOM
+
+El problema subyacente con el uso y la manipulación del DOM es que algunas páginas tienen miles de nodos.
+
+
+<img height="10" border="rounded" src="/img/VDOM-DOM.jpg">
+
+Es por eso que algunos marcos (como Vue) tienen algo llamado DOM virtual. El DOM virtual es una forma de representar el DOM real con objetos JavaScript.
+
+
+---
+
+# La solución
+
+
+<img height="10" border="rounded" src="/img/virtual DOM.jpg">
+
+Arriba puede ver cómo podemos expresar un div como un objeto JavaScript. A continuación, sabrá cómo tomar este nodo virtual y realizar las llamadas de JavaScript adecuadas para crear un nodo DOM real en el navegador. En realidad, hay un paso adicional en este ciclo de vida, llamado funciones de renderizado.
+
+---
+
+# ¿Qué es Vue?
+
+Vue (pronunciado / vjuː /, como vista) es un marco progresivo para construir interfaces de usuario.
+
+
+- A diferencia de otros marcos monolíticos, Vue está diseñado desde cero para ser adoptable de forma incremental. 
+- La biblioteca principal se centra solo en la capa de vista y es fácil de recoger e integrar con otras bibliotecas o proyectos existentes.
+- Vue también es perfectamente capaz de impulsar aplicaciones sofisticadas de una sola página cuando se usa en combinación con [herramientas modernas](https://v3.vuejs.org/guide/single-file-component.html) y [bibliotecas de soporte](https://github.com/vuejs/awesome-vue#components--libraries) .
 <br>
 <br>
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+Puedes leer más de [¿Por qué Vue?](https://v3.vuejs.org/guide/introduction.html)
 
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
 
 <style>
 h1 {
@@ -80,68 +165,240 @@ h1 {
 }
 </style>
 
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+<!--
+The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+-->
 
 ---
-layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
+
+# ¿Qué es una función de renderizado?
+
+La función de render es lo que crea el nodo virtual, que se envía a Vue para actualizar el DOM.
+
+
+<div class="grid mx-2">
+
+<img border="rounded" src="/img/render-function.jpg">
+  </div>
+
+
 ---
 
-# Code
+# ¿Qué es una función de renderizado?
 
-Use code snippets and get the highlighting directly![^1]
+La función de render es lo que crea el nodo virtual, que se envía a Vue para actualizar el DOM. Más tarde, si los datos utilizados por la función de renderizado cambian, la función de renderizado se ejecutará nuevamente produciendo un nuevo nodo DOM virtual. Luego, Vue toma el nodo antiguo y el nuevo, compara los dos y realiza las llamadas DOM apropiadas para cambiar la página web.
 
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
+<div class="grid mx-28">
+  <img height="10" border="rounded" src="/img/render-function-compare.jpg">
+</div>
+
+<!--
+La función de render es lo que crea el nodo virtual, que se envía a Vue para actualizar el DOM. Más tarde, si los datos utilizados por la función de renderizado cambian, la función de renderizado se ejecutará nuevamente produciendo un nuevo nodo DOM virtual. Luego, Vue toma el nodo antiguo y el nuevo, compara los dos y realiza las llamadas DOM apropiadas para cambiar la página web.
+-->
+
+---
+
+# Una analogía del DOM virtual
+
+
+<div grid="~ cols-2 gap-4">
+  <div>
+
+   <div class="grid mx-24">
+        <img  border="rounded" src="/img/edificio.jpg">
+    </div>
+  </div>
+<div>
+  Deseo realizar  cambios en piso 29 de un edificio de 100 pisos
+
+
+  - Puedo demoler todo en el piso 29 y empezar de cero.
+  - Puedo crear nuevos planos, comparar las diferencias y realizar actualizaciones con la mínima cantidad de trabajo.
+</div>
+</div>
+
+
+---
+
+# Anatomía de Vue 3
+
+
+<div grid="~ cols-3 gap-4">
+<div>
+
+### Módulo de reactividad
+Los objetos reactivos se inicializan 
+
+</div>
+<div>
+
+### Módulo compilador
+
+  Se convierte el HTML en una función de renderizado.
+
+ 
+</div>
+  
+  
+<div>
+  
+### Módulo Renderer. 
+  Se compone de 3 fases:
+- Fase de renderizado
+- Fase de montaje (o creación)
+- Fase de parche (o actualización)
+
+</div>
+</div>
+
+<!--
+Preguntar que es la reactividad.
+Módulo de reactividad. Esto permite crear objetos reactivos de JavaScript que pueden observarse en busca de cambios. Cuando se ejecuta el código que utiliza estos objetos, se realiza un seguimiento para ejecutarlo más tarde si cambia el objeto reactivo. 
+Módulo compilador. Esto sabe cómo tomar plantillas HTML y compilarlas en funciones de renderizado. Esto puede suceder en el navegador en tiempo de ejecución, pero ocurre más a menudo cuando se crea un proyecto de Vue, por lo que un navegador solo recibe funciones de renderizado. 
+Módulo Renderer. El renderizador contiene el código para 3 fases diferentes de renderizado de un componente en una página web. 
+Fase de renderizado. Cuando se llama a la función de renderización y devuelve una representación del DOM real llamado DOM virtual. El DOM virtual es una representación de objeto JavaScript de lo que se procesará en el navegador. 
+Fase de montaje (o creación): el renderizador toma el objeto DOM virtual y realiza llamadas JavaScript DOM reales para crear una página web. 
+Fase de parche (o actualización): el renderizador toma los dos objetos DOM virtual, uno antiguo y uno nuevo, y actualiza solo las partes de la página web que han cambiado usando llamadas DOM JavaScript.
+-->
+
+
+
+---
+layout: section
+---
+
+# Configuración
+
+
+---
+
+# Herramientas
+
+IDE:    
+- Visual Code
+	
+    Descarga: https://code.visualstudio.com/download 
+
+
+Complementos
+- Vetur
+- Es6-string-html
+- Live Server
+
+---
+
+# Repositorio
+
+- Descarga git
+https://git-scm.com/downloads 
+- Clona el proyecto: 
+	git clone https://github.com/FranzAnt/Vue-3-Intro
+- git checkout CX_base
+- git checkout CX_fin
+
+
+---
+layout: section
+---
+
+# Empecemos
+
+
+---
+
+# Estructura
+
+<div class="grid mx-2">
+
+<img border="rounded" src="/img/structure.png">
+  </div>
+
+
+---
+
+# ¿Qué veremos?
+
+
+- Creación de la aplicación Vue
+
+- ENLAZADO de atributos 
+
+- RENDERIZADO condicional
+
+- RENDERIZADO DE LISTAS
+
+- Manejo de eventos
+
+- ENLAZADO DE clases y estilos
+
+- Propiedades COMPUTADAS
+
+- OBSERVADORES
+
+- Formularios y V-model
+
+- Componentes
+
+
+---
+
+# Creación de la aplicación Vue
+
+
+Use code snippets and get the highlighting directly!
+
+Colocamos en main.js :
+```js
+const options = {
+	data: () =>({
+      
+    })
 }
 
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = {...user, ...update}  
-  saveUser(id, newUser)
-}
+const app = Vue.createApp(options)
 ```
 
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
+Agregamos en nuestro index.html :
+```html
+<script>
+  const appMount = app.mount('#app')
+</script>
+```
 
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
 
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
+---
+
+# Creación de la aplicación Vue
+
+Finalmente tendriamos:
+```html
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Taller de Vue 3</title>
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Ejemplo</h1>
+    </div>
+
+    <!-- Import Js -->
+    <script src="./main.js"></script>
+    <script>
+        const appMount = app.mount('#app')
+      </script>
+  </body>
+</html>
+```
+
+
+---
+
 
 ---
 
